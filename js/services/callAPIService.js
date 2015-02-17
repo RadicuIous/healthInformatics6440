@@ -11,7 +11,8 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
 		'$resource',
         function ($log, $q, $resource) 
 		{
-          var fhirAPIUri = " http://fhirtest.uhn.ca/baseDstu1/";
+          //var fhirAPIUri = " http://fhirtest.uhn.ca/baseDstu1/";
+	  var fhirAPIUri = " https://taurus.i3l.gatech.edu:8443/HealthPort/fhir/";
           var successCallback = function(rawResponse, deferred) 
 		  {
 			$log.info("Response Received :"+angular.toJson(rawResponse));
