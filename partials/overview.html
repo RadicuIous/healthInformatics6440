@@ -7,5 +7,33 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Patient at a Glance
+                </div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-plus-square fa-fw"></i> Statistics Panel
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group" ng-repeat="entry in patientStats">
+                                <a href="#" class="list-group-item">
+                                    {{entry.content.name.coding[0].display}}
+                                    <span class="pull-right text-muted small"><em>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}}</em>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
