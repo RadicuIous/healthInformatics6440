@@ -11,8 +11,9 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
 		'$resource',
         function ($log, $q, $resource) 
 		{
-          var fhirAPIUri = " http://fhirtest.uhn.ca/baseDstu1/";
-          var successCallback = function(rawResponse, deferred) 
+          //var fhirAPIUri = " http://fhirtest.uhn.ca/baseDstu1/";
+            var fhirAPIUri = "https://taurus.i3l.gatech.edu:8443/HealthPort/fhir/";
+          var successCallback = function(rawResponse, deferred)
 		  {
 			$log.info("Response Received :"+angular.toJson(rawResponse));
              if(1){
@@ -30,6 +31,9 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
             var _execute = function(service, params, successCtrl, failureCtrl) {
                 var response = undefined;
 				var apiUri = '';
+                if(params){
+                    params = params.replace("|","/");
+                }
 				if(params === '' || params === undefined || params === null)
 				{
 					apiUri = fhirAPIUri + service + '?_format=json';
@@ -69,7 +73,8 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
                 } else {
                         $resource(apiUri, {}, {
                             get : {
-                                method : "GET"
+                                method : "GET",
+                                dataType: 'jsonp'
                             }
                         }).get(null, success, failure);
                     

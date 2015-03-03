@@ -24,7 +24,8 @@ angular.module('myApp.controllers', [])
 			$scope.patientObject = failureResponse;
 		}
         $scope.patientClick = function(idLink){
-            var patientId = idLink.split('/').pop();
+            var urlArray = idLink.split('/');
+            var patientId = urlArray[urlArray.length-2]+'|'+urlArray[urlArray.length-1];
             $location.path('Overview/' + patientId);
         }
 
