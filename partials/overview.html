@@ -12,27 +12,28 @@
                 <div class="panel-heading">
                     Patient at a Glance
                 </div>
-                <div class="panel-body">
-
+                <div class="row show-grid">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8"></div>
                 </div>
-                <div class="panel-footer">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-plus-square fa-fw"></i> Statistics Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group" ng-repeat="entry in patientStats">
-                                <a href="#" class="list-group-item">
-                                    {{entry.content.name.coding[0].display}}
-                                    <span class="pull-right text-muted small"><em>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}}</em>
-                                    </span>
-                                </a>
+                    <div class="panel-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-plus-square fa-fw"></i> Statistics Panel
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="list-group" ng-repeat="entry in patientStats">
+                                        {{entry.content.name.coding[0].display}}
+                                            <span class="pull-right text-muted small"><em>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}} {{entry.content.appliesDateTime}}</em>
+                                            </span>
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
                             </div>
-                        </div>
-                        <!-- /.panel-body -->
+                      <div class="panel-footer">
                     </div>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
