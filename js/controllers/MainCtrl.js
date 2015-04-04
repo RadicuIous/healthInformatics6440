@@ -52,7 +52,10 @@ angular.module('myApp.controllers', [])
 			$log.info("Response received by MainCtrl.js :: patientFailureApiCall");
 			$scope.patientObject = failureResponse;
 		}
-        $scope.patientClick = function(idLink){
+        $scope.patientClick = function(idLink, firstName, lastName){
+            $rootScope.firstName = firstName;
+            $rootScope.lastName = lastName;
+
             var urlArray = idLink.split('/');
             var patientId = urlArray[urlArray.length-2]+'|'+urlArray[urlArray.length-1];
             $location.path('Overview/' + patientId);
