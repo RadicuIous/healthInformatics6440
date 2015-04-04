@@ -16,6 +16,11 @@ angular.module('myApp.controllers', [])
 		$scope.patientObject  = null;
         $scope.paginationNumbers = 0;
         $scope.selectedIndex = 0;
+        $scope.prioritizationMethod = "Check-in Time";
+        $scope.pretendDate = new Date();
+        
+        
+        
 
 		$scope.patientSuccessApiCall = function(successResponse) {
 		    $log.info("Response received by MainCtrl.js :: patientSuccessApiCall");

@@ -1,48 +1,70 @@
-    <div id="wrapper">
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Patient Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <ul class="pagination">
-                <li ng-class="{active: {{$index}} === selectedIndex}" ng-click="getPaginatedData($index)" ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index + 1}}</a></li>
-            </ul>
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Context Classes
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Priority</th>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-click="patientClick('{{patient.id}}','{{patient.content.name[0].given[0]}}','{{patient.content.name[0].family[0]}}')" style="cursor: pointer;" ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}" ng-repeat="patient in patientObject.entry" ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
-                                    <td>{{$index + offset + 1}}</td>
-                                    <td>{{patient.content.name[0].family[0]}}</td>
-                                    <td>{{patient.content.name[0].given[0]}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.panel -->
-          </div>
-    </div>
+<div id="wrapper">
+
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Patient Dashboard</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<ul class="pagination pagination-lg" style="clear: both;">
+			<li ng-class="{active: {{$index}} === selectedIndex}"
+				ng-click="getPaginatedData($index)"
+				ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index
+					+ 1}}</a></li>
+		</ul>
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Patient
+						List: {{pretendDate | date:'MM/dd'}}</h4>
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-info btn-sm dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false">
+							Prioritized By: {{prioritizationMethod}}<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li ng-repeat="prioritization in prioritizations"><a
+								href="#">{{prioritization.name}}</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Define New</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Priority</th>
+									<th>Last Name</th>
+									<th>First Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									ng-click="patientClick('{{patient.id}}','{{patient.content.name[0].given[0]}}','{{patient.content.name[0].family[0]}}')"
+									style="cursor: pointer;"
+									ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}"
+									ng-repeat="patient in patientObject.entry"
+									ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
+									<td>{{$index + offset + 1}}</td>
+									<td>{{patient.content.name[0].family[0]}}</td>
+									<td>{{patient.content.name[0].given[0]}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.table-responsive -->
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.panel -->
+	</div>
+</div>
 
 
