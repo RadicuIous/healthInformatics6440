@@ -16,6 +16,9 @@ angular.module('myApp.controllers', [])
 		$scope.patientObject  = null;
         $scope.paginationNumbers = 0;
         $scope.selectedIndex = 0;
+        $rootScope.prioritizationMethod = "Check-in Time";
+        $rootScope.pretendDate = new Date();
+        $rootScope.pageIndex = 1;
 
 		$scope.patientSuccessApiCall = function(successResponse) {
 		    $log.info("Response received by MainCtrl.js :: patientSuccessApiCall");
@@ -33,6 +36,7 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.getPaginatedData = function(pageNumber) {
+        	$rootScope.pageIndex++;
             $scope.selectedIndex = pageNumber;
             $scope.offset = pageNumber * 50;
             var apiSplit = $scope.patientObject.link[1].href.split('&');
@@ -44,7 +48,10 @@ angular.module('myApp.controllers', [])
             }
             apiUri += '&_getpagesoffset=' + $scope.offset;
             $log.error('apiURI: '+apiUri);
-
+            var someDate = new Date();
+            var numberOfDaysToAdd = pageNumber;
+            someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+            $rootScope.pretendDate = someDate;
             callAPIService.execute(null, null, $scope.patientSuccessApiCall, $scope.patientFailureApiCall, apiUri);
         }
 
@@ -52,7 +59,10 @@ angular.module('myApp.controllers', [])
 			$log.info("Response received by MainCtrl.js :: patientFailureApiCall");
 			$scope.patientObject = failureResponse;
 		}
-        $scope.patientClick = function(idLink){
+        $scope.patientClick = function(idLink, firstName, lastName){
+            $rootScope.firstName = firstName;
+            $rootScope.lastName = lastName;
+
             var urlArray = idLink.split('/');
             var patientId = urlArray[urlArray.length-2]+'|'+urlArray[urlArray.length-1];
             $location.path('Overview/' + patientId);
