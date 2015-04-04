@@ -8,12 +8,7 @@
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
-		<ul class="pagination pagination-lg" style="clear: both;">
-			<li ng-class="{active: {{$index}} === selectedIndex}"
-				ng-click="getPaginatedData($index)"
-				ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index
-					+ 1}}</a></li>
-		</ul>
+
 		<div class="col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
@@ -33,7 +28,16 @@
 					</div>
 				</div>
 				<!-- /.panel-heading -->
+
 				<div class="panel-body">
+					<!--  useful for testing only 
+					<ul class="pagination clearfix" style="clear: both;">
+						<li ng-class="{active: {{$index}} === selectedIndex}"
+							ng-click="getPaginatedData($index)"
+							ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index
+								+ 1}}</a></li>
+					</ul>
+					-->
 					<div class="table-responsive">
 						<table class="table">
 							<thead>
@@ -60,6 +64,12 @@
 					<!-- /.table-responsive -->
 				</div>
 				<!-- /.panel-body -->
+				<nav>
+					<ul class="pager">
+						<li><a ng-hide="pageIndex >= paginationNumbers"
+							ng-click="getPaginatedData(pageIndex)" href="">Go to Tomorrow</a></li>
+					</ul>
+				</nav>
 			</div>
 			<!-- /.panel -->
 		</div>
