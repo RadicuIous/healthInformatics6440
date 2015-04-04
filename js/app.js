@@ -6,6 +6,7 @@ angular.module('myApp', [
     'ngAnimate',
     'myApp.filters',
     'myApp.controllers',
+    'myApp.filters',
 	'healthInformatics.fhir.api',
     'healthInformatics.fhir.navbar'
 ]).
