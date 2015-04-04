@@ -18,17 +18,19 @@ angular.module('myApp.controllers').controller('OverviewCtrl', [
             $scope.patientStats = {};
             $scope.uniqueObservations = {};
             $scope.observationHistory = {};
-            var healthOverview = [
+            /*var healthOverview = [
                 "Body Height",
                 "Body Weight",
                 "Diastolic BP",
                 "Systolic BP",
                 "Heart Beat",
                 "Respiration Rate",
-                "Total Cholesterol"];
+                "Total Cholesterol",
+                "Body Temperature"];*/
+
             for (var i = 0; i < $scope.observationObject.entry.length; i++){
                 if( !($scope.patientStats.hasOwnProperty($scope.observationObject.entry[i].content.name.coding[0].display))){
-                    if(healthOverview.indexOf($scope.observationObject.entry[i].content.name.coding[0].display) > -1){
+                    if($scope.observationObject.entry[i].content.valueQuantity && $scope.observationObject.entry[i].content.valueQuantity.value !== null){
                         $scope.patientStats[$scope.observationObject.entry[i].content.name.coding[0].display] = $scope.observationObject.entry[i];
                     }else{
                         $scope.uniqueObservations[$scope.observationObject.entry[i].content.name.coding[0].display] = $scope.observationObject.entry[i];
@@ -44,3 +46,17 @@ angular.module('myApp.controllers').controller('OverviewCtrl', [
         }
         callAPIService.execute('Observation', 'subject=' + $routeParams.patientId, observationSuccessApiCall, observationFailureApiCall);
     }]);
+angular.module('myApp.filters', [])
+    .filter( 'filterDivs', function() {
+        return function( input ) {
+            var temp = input.replace('<div>','').replace('</div>','');
+            temp = temp.split('=');
+            return temp[1];
+        }
+    })
+    .filter( 'removeTime', function() {
+        return function( input ) {
+            var temp = input.split('T');
+            return temp[0];
+        }
+    });
