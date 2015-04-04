@@ -8,7 +8,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <ul class="pagination">
-                <li ng-class="{active: $index==selectedIndex}" ng-click="selectedIndex = $index;getPaginatedData($index)" ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index + 1}}</a></li>
+                <li ng-class="{active: {{$index}} === selectedIndex}" ng-click="getPaginatedData($index)" ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index + 1}}</a></li>
             </ul>
             <div class="col-lg-6">
                 <div class="panel panel-default">

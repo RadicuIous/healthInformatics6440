@@ -33,6 +33,7 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.getPaginatedData = function(pageNumber) {
+            $scope.selectedIndex = pageNumber;
             $scope.offset = pageNumber * 50;
             var apiSplit = $scope.patientObject.link[1].href.split('&');
             var apiUri = apiSplit[0];
