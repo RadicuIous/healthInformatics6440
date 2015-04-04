@@ -27,7 +27,7 @@ angular.module('myApp.controllers').controller('ConditionCtrl', [
         					   conditionFailureApiCall);
 }]);
 
-angular.module('myApp.filters', [])
+angular.module('myApp.filters')
    .filter( 'parseConditionDiv', function() {
        return function( input ) {
            return input.replace('<table><tr>','').replace('</tr></table>','');

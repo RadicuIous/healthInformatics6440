@@ -4,7 +4,6 @@ angular.module('myApp', [
     'ngTouch',
     'ngRoute',
     'ngAnimate',
-    'myApp.filters',
     'myApp.controllers',
     'myApp.filters',
 	'healthInformatics.fhir.api',
