@@ -24,16 +24,13 @@
                                     <th>Priority</th>
                                     <th>Last Name</th>
                                     <th>First Name</th>
-                                    <th>Age</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-click="patientClick('{{patient.id}}')" style="cursor: pointer;" ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}" ng-repeat="patient in patientObject.entry" ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
+                                <tr ng-click="patientClick('{{patient.id}}','{{patient.content.name[0].given[0]}}','{{patient.content.name[0].family[0]}}')" style="cursor: pointer;" ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}" ng-repeat="patient in patientObject.entry" ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
                                     <td>{{$index + offset + 1}}</td>
                                     <td>{{patient.content.name[0].family[0]}}</td>
                                     <td>{{patient.content.name[0].given[0]}}</td>
-                                    <td ng-if="patient.content.birthDate != undefined">{{patient.content.birthDate}}</td>
-                                    <td ng-if="patient.content.birthDate === undefined ">UNKNOWN</td>
                                 </tr>
                                 </tbody>
                             </table>
