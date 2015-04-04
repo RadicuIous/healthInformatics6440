@@ -14,12 +14,40 @@ angular.module('myApp.controllers', [])
         NavBarService.updateNavigation('MAIN');
 		var responseObject = null;
 		$scope.patientObject  = null;
+        $scope.paginationNumbers = 0;
+        $scope.selectedIndex = 0;
 
-		var patientSuccessApiCall = function(successResponse) {
+		$scope.patientSuccessApiCall = function(successResponse) {
 		    $log.info("Response received by MainCtrl.js :: patientSuccessApiCall");
 			$scope.patientObject = successResponse;
+            if($scope.paginationNumbers === 0){
+                $scope.paginationNumbers = parseInt(successResponse.totalResults/50);
+                if(successResponse.totalResults % 50 > 0){
+                    $scope.paginationNumbers += 1;
+                }
+            }
 		}
-		var patientFailureApiCall = function(failureResponse) {
+
+        $scope.getNumber = function(num) {
+            return new Array(num);
+        }
+
+        $scope.getPaginatedData = function(pageNumber) {
+            $scope.offset = pageNumber * 50;
+            var apiSplit = $scope.patientObject.link[1].href.split('&');
+            var apiUri = apiSplit[0];
+            for (var i = 1; i < apiSplit.length; i++){
+                if(apiSplit[i].indexOf('getpagesoffset') === -1){
+                    apiUri += '&'+ apiSplit[i];
+                }
+            }
+            apiUri += '&_getpagesoffset=' + $scope.offset;
+            $log.error('apiURI: '+apiUri);
+
+            callAPIService.execute(null, null, $scope.patientSuccessApiCall, $scope.patientFailureApiCall, apiUri);
+        }
+
+		$scope.patientFailureApiCall = function(failureResponse) {
 			$log.info("Response received by MainCtrl.js :: patientFailureApiCall");
 			$scope.patientObject = failureResponse;
 		}
@@ -31,7 +59,7 @@ angular.module('myApp.controllers', [])
 
 		
 
-		callAPIService.execute('Patient', null, patientSuccessApiCall, patientFailureApiCall);
+		callAPIService.execute('Patient', null, $scope.patientSuccessApiCall, $scope.patientFailureApiCall);
 		/*
 		callAPIService.execute('Observation', null, successfulApiCall, failureApiCall);
 		callAPIService.execute('DiagnosticReport', null, successfulApiCall, failureApiCall);

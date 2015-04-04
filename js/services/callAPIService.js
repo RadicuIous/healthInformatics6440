@@ -28,20 +28,24 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
                 $log.info("Error Response Received :"+angular.toJson(errorResponse));
             };
 
-            var _execute = function(service, params, successCtrl, failureCtrl) {
+            var _execute = function(service, params, successCtrl, failureCtrl, paginationUrl) {
                 var response = undefined;
 				var apiUri = '';
-                if(params){
-                    params = params.replace("|","/");
+                if(paginationUrl){
+                      apiUri = paginationUrl;
+                }else{
+                    if(params){
+                        params = params.replace("|","/");
+                    }
+                    if(params === '' || params === undefined || params === null)
+                    {
+                        apiUri = fhirAPIUri + service + '?_format=json';
+                    }else{
+                        apiUri = fhirAPIUri + service + '?'+ params + '&_format=json';
+                    }
                 }
-				if(params === '' || params === undefined || params === null)
-				{
-					apiUri = fhirAPIUri + service + '?_format=json';
-				}else{
-					apiUri = fhirAPIUri + service + '?'+ params + '&_format=json';
-				}
                 _callAPI(apiUri, successCallback, failureCallback)
-                    .then(function(rawResponse) 
+                    .then(function(rawResponse)
 					{
                         if(successCtrl) {
                             successCtrl(rawResponse);
@@ -49,7 +53,7 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
                     },
                     function(rawResponse)
 					{
-                       if(failureCtrl) 
+                       if(failureCtrl)
 					   {
                            failureCtrl(rawResponse);
                        }
@@ -67,16 +71,17 @@ angular.module('healthInformatics.fhir.api', ['ngResource'])
                     failureCallback();
                     deferred.reject(errorResponse);
                 };
-
                 if(angular.isUndefined(angular.isUndefined(apiUri))) {
                     $log.error('callAPI() : Invalid input to method');
                 } else {
+                    $log.debug('callAPI() : Calling get ajax for '+apiUri);
                         $resource(apiUri, {}, {
                             get : {
                                 method : "GET",
                                 dataType: 'jsonp'
                             }
                         }).get(null, success, failure);
+                    $log.debug('callAPI() : End Ajax call');
                     
                 }
 

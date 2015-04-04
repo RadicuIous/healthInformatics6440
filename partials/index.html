@@ -7,9 +7,9 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-
-
+            <ul class="pagination">
+                <li ng-class="{active: $index==selectedIndex}" ng-click="selectedIndex = $index;getPaginatedData($index)" ng-repeat="page in getNumber(paginationNumbers) track by $index"><a>{{$index + 1}}</a></li>
+            </ul>
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -29,7 +29,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-click="patientClick('{{patient.id}}')" style="cursor: pointer;" ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}" ng-repeat="patient in patientObject.entry" ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
-                                    <td>{{$index}}</td>
+                                    <td>{{$index + offset + 1}}</td>
                                     <td>{{patient.content.name[0].family[0]}}</td>
                                     <td>{{patient.content.name[0].given[0]}}</td>
                                     <td ng-if="patient.content.birthDate != undefined">{{patient.content.birthDate}}</td>
