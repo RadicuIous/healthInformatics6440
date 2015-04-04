@@ -19,22 +19,124 @@
                 </div>
                     <div class="panel-body">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-plus-square fa-fw"></i> Statistics Panel
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    <div class="list-group" ng-repeat="entry in patientStats">
-                                        {{entry.content.name.coding[0].display}}
-                                            <span class="pull-right text-muted small"><em>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}} {{entry.content.appliesDateTime}}</em>
+                        <div class="panel-heading">
+                            <i class="fa fa-plus-square fa-fw"></i> Statistics Panel
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group" ng-repeat="entry in patientStats">
+                                {{entry.content.name.coding[0].display}}
+                                            <span class="pull-right text-muted small"><em><strong>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}} </strong>{{entry.content.appliesDateTime}}</em>
                                             </span>
-                                    </div>
-                                </div>
-                                <!-- /.panel-body -->
                             </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
                       <div class="panel-footer">
+                          <div class="panel panel-default">
+                              <div class="panel-heading">
+                                  <i class="fa fa-plus-square fa-fw"></i> Unique Observations
+                              </div>
+                              <!-- /.panel-heading -->
+                              <div class="panel-body">
+                                  <div class="list-group" ng-repeat="entry in uniqueObservations">
+                                     {{entry.content.name.coding[0].display}}
+                                      {{entry.content.text.div| filterDivs}}
+                                            <span class="pull-right text-muted small"><em><strong>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}} </strong>{{entry.content.appliesDateTime}}</em>
+                                            </span>
+                                  </div>
+                              </div>
+                              <!-- /.panel-body -->
+                          </div>
                     </div>
                     </div>
+                <div class="chat-panel panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-comments fa-fw"></i>
+                        Chat
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu slidedown">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-refresh fa-fw"></i> Refresh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-check-circle fa-fw"></i> Available
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-times fa-fw"></i> Busy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-clock-o fa-fw"></i> Away
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul class="chat">
+                            <li class="left clearfix" ng-repeat="entry in uniqueObservations">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
+                                    </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">{{entry.content.name.coding[0].display}}</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i> {{entry.content.appliesDateTime | removeTime}}
+                                        </small>
+                                    </div>
+                                    <p>
+                                        {{entry.content.text.div| filterDivs}}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle">
+                                    </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <small class=" text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
+                                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                    </div>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        Send
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
+                    <!-- /.panel-footer -->
+                </div>
             </div>
         </div>
     </div>

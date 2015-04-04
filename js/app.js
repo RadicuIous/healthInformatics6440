@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'myApp.controllers',
+    'myApp.filters',
 	'healthInformatics.fhir.api',
     'healthInformatics.fhir.navbar'
 ]).
