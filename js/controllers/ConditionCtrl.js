@@ -27,3 +27,16 @@ angular.module('myApp.controllers').controller('ConditionCtrl', [
         					   conditionSuccessApiCall, 
         					   conditionFailureApiCall);
 }]);
+
+angular.module('myApp.filters')
+   .filter( 'parseConditionSystem', function() {
+       return function( input ) {
+	 		if(input.search('snomed') != -1) {
+	 			return input.match('snomed')[0].toUpperCase();
+	 		}
+	 		if(input.search('icd-9') != -1) {
+	 			return input.match('icd-9')[0].toUpperCase();
+	 		}
+	 		return input;
+       }
+   });

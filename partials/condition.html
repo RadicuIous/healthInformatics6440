@@ -17,11 +17,12 @@
             		<dt>Condition</dt>
             		<dd>{{condition.content.code.coding[0].display}}</dd>
             		<dt>Onset Date</dt>
-            		<dd>{{condition.content.onsetDate}}</dd>
+            		<dd>{{condition.content.code.coding[0].system.search('snomed') == -1 ? 
+            			  condition.content.onsetDate : condition.content.dateAsserted | date: 'M/d/yyyy'}}</dd>
             		<dt>Status</dt>
             		<dd>{{condition.content.status}}</dd>
             		<dt>System</dt>
-            		<dd>{{condition.content.code.coding[0].system}}</dd>
+            		<dd>{{condition.content.code.coding[0].system | parseConditionSystem}}</dd>
             		<dt>Code</dt>
             		<dd>{{condition.content.code.coding[0].code}}</dd>
            		</dl>
