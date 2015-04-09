@@ -30,7 +30,7 @@ angular.module('healthInformatics.fhir.navbar', ['ngResource'])
                             { "description":"Overview",   "link":"index.html#/Overview/"+$routeParams.patientId },
                             { "description":"Condition",    "link":"index.html#/Condition/"+$routeParams.patientId},
                             { "description":"Management", "link":"index.html#/Management/"+$routeParams.patientId},
-                            { "description":"Graphs",     "link":"index.html#/Graphs/"+$routeParams.patientId},
+                            { "description":"Medications","link":"index.html#/Medications/"+$routeParams.patientId},
                             { "description":"Doctors",    "link":"index.html#/Doctors/"+$routeParams.patientId}
                         ]
                     break;

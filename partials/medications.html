@@ -1,0 +1,32 @@
+<div id="wrapper">
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Medications & Prescriptions</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Medications & Prescriptions
+                </div>
+
+                    <div class="panel-body" ng-repeat="entry in patientStats">
+                        {{entry.content.medication.display}} - {{entry.content.dosageInstruction[0].doseQuantity.value}} {{entry.content.dosageInstruction[0].doseQuantity.units}}
+                            <li><span class="small"><em>Date: {{entry.content.dateWritten}} - Status: {{entry.content.status}}</em>
+                                    </span></li>
+                            <li><span class="small"><em>Dosage Details: {{entry.content.dosageInstruction[0].text}} - Dispense Repeats: {{entry.content.dispense.numberOfRepeatsAllowed}}  - Dispense Qty: {{entry.content.dispense.quantity.value}}</em>
+                                    </span></li>
+                        <li><span class="small"><em>Prescriber: {{entry.content.prescriber.display}} - Code: {{entry.content.contained[0].code.coding[0].code}}</em>
+                                    </span></li>
+                    </div>
+                    <div class="panel-body" ng-if="patientStats.length == 0" >
+                        No Medications or Prescriptions on Record.
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
