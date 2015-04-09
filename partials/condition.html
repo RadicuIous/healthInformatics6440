@@ -11,11 +11,21 @@
             <div class="panel-heading">
                 <i class="fa fa-stethoscope fa-fw"></i>Existing Conditions	
             </div>
-            {{conditionObject.entry[0].content.text.div}}
             <!-- /.panel-heading -->
-            <table class="panel-body">
-                <tr ng-repeat="condition in conditionObject.entry">{{condition.content.text.div}}</tr>
-            </table>
+            <div class="panel-body">
+            	<dl ng-repeat="condition in conditionObject.entry">
+            		<dt>Condition</dt>
+            		<dd>{{condition.content.code.coding[0].display}}</dd>
+            		<dt>Onset Date</dt>
+            		<dd>{{condition.content.onsetDate}}</dd>
+            		<dt>Status</dt>
+            		<dd>{{condition.content.status}}</dd>
+            		<dt>System</dt>
+            		<dd>{{condition.content.code.coding[0].system}}</dd>
+            		<dt>Code</dt>
+            		<dd>{{condition.content.code.coding[0].code}}</dd>
+           		</dl>
+            </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->

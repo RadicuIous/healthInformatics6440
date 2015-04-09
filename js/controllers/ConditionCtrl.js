@@ -5,9 +5,10 @@ angular.module('myApp.controllers').controller('ConditionCtrl', [
     '$rootScope',
     '$routeParams',
     '$log',
+    '$sce',
     'NavBarService',
     'callAPIService',
-    function ($scope, $rootScope, $routeParams, $log, NavBarService, callAPIService) {
+    function ($scope, $rootScope, $routeParams, $log, $sce, NavBarService, callAPIService) {
 
         $rootScope.showNavBar = true;
         NavBarService.updateNavigation('CONDITION');
