@@ -14,7 +14,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <ul class="timeline">
-                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats">
+                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats | object2Array | orderBy:'content.dateWritten'">
                         <div class="timeline-badge"><img ng-class="{'flip-it': $index % 2 === 1}"  src='/images/rx.jpg' height="50px" width="50px"></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
