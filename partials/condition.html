@@ -1,44 +1,70 @@
 <div id="wrapper">
-
     <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"><img src='/images/condition.png' style="margin-top: -30px" height="50px" width="50px">&nbsp;Existing Conditions</h1>
-            </div>
-            <!-- /.col-lg-12 -->
+        <div class="col-lg-12">
+        	<h1 class="page-header"><img src='/images/condition.png' style="margin-top: -30px" height="50px" width="50px">&nbsp;Existing Conditions</h1>
         </div>
+        <!-- /.col-lg-12 -->
         <div class="col-lg-8">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-            	<h2>{{lastName}}, {{firstName}}</h2>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-            	<div id="condition" class="panel panel-default" ng-repeat="condition in conditionObject.entry">
-            		<div class="panel-heading">
-            			<i class="fa fa-stethoscope fa-fw"></i>
-            			{{condition.content.code.coding[0].display}}
-            		</div>
-            		<div class="panel-body">
-	            		<dl class="pull-left dl-horizontal" style="margin:0 0;margin-left:40px;">
-	            			<dt>Onset Date:</dt>
-		            		<dd>{{condition.content.code.coding[0].system.search('snomed') == -1 ? 
-		            			  condition.content.onsetDate : condition.content.dateAsserted | date: 'yyyy-M-d'}}</dd>
-		            		<dt>Status:</dt>
-		            		<dd>{{condition.content.status}}</dd>
-	            		</dl>
-	            		<dl class="pull-left dl-horizontal" style="margin:0 0;">
-		            		<dt>System:</dt>
-		            		<dd>{{condition.content.code.coding[0].system | parseConditionSystem}}</dd>
-		            		<dt>Code:</dt>
-		            		<dd>{{condition.content.code.coding[0].code}}</dd>
-	            		</dl>
-           			</div>
-            </div>
-            <!-- /.panel-body -->
-        </div> 
-        <!-- /.panel -->
+        	<div class="panel panel-primary">
+            	<div class="panel-heading">
+            		<h2>{{lastName}}, {{firstName}}</h2>
+            	</div>
+            	<!-- /.panel-heading -->
+            	<div class="panel-body">
+            		<!-- <ul class="timeline">
+                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="condition in conditionObject.entry">
+                        <div class="timeline-badge"><img ng-class="{'flip-it': $index % 2 === 1}"  src='/images/rx.jpg' height="50px" width="50px"></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title"> {{condition.content.code.coding[0].display}}</h4>
+                                <p>
+                                	<small class="text-muted">
+                                		<i class="fa fa-clock-o"></i> 
+                                		{{condition.content.code.coding[0].system.search('snomed') == -1 ? condition.content.onsetDate : condition.content.dateAsserted | date: 'yyyy-M-d'}}
+                                	</small>
+                                </p>
+                            </div>
+                            <div class="timeline-body">
+                            	<dl class="dl-horizontal">
+                            		<dt style="text-align:left;">Status:</dt>
+		            				<dd>{{condition.content.status}}</dd>
+		            				<dt style="text-align:left;">System:</dt>
+		            				<dd>{{condition.content.code.coding[0].system | parseConditionSystem}}</dd>
+		            				<dt style="text-align:left;">Code:</dt>
+		            				<dd>{{condition.content.code.coding[0].code}}</dd>
+	            				</dl>
+	            			</div>
+                        </div>
+                    </li>
+                	</ul> -->
+            		<div class="panel panel-default" ng-repeat="condition in conditionObject.entry">
+            			<div class="panel-heading">
+            				<i class="fa fa-stethoscope fa-fw"></i>
+            				{{condition.content.code.coding[0].display}}
+            			</div>
+            			<div class="panel-body">
+	            			<dl class="pull-left dl-horizontal" style="margin:0 0;margin-left:40px;">
+	            				<dt>Onset Date:</dt>
+		            			<dd>{{condition.content.code.coding[0].system.search('snomed') == -1 ? 
+		            				  condition.content.onsetDate : condition.content.dateAsserted | date: 'yyyy-M-d'}}</dd>
+		            			<dt>Status:</dt>
+		            			<dd>{{condition.content.status}}</dd>
+	            			</dl>
+	            			<dl class="pull-left dl-horizontal" style="margin:0 0;">
+		            			<dt>System:</dt>
+		            			<dd>{{condition.content.code.coding[0].system | parseConditionSystem}}</dd>
+		            			<dt>Code:</dt>
+		            			<dd>{{condition.content.code.coding[0].code}}</dd>
+	            			</dl>
+           				</div>
+            	</div>
+            	<!-- /.panel-body -->
+        	</div> 
+        	<!-- /.panel -->
         </div>
-    </div>
-    </div>
+        <!--  /.col-lg -->
+	</div>
+   	<!-- /.page-wrapper -->
 </div>
+<!-- /.wrapper -->
+
