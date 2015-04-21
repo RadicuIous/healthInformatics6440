@@ -19,8 +19,17 @@ angular.module('myApp.controllers', [])
         $rootScope.prioritizationMethod = "Check-in Time";
         $rootScope.pretendDate = new Date();
         $rootScope.pageIndex = 1;
-
-		$scope.patientSuccessApiCall = function(successResponse) {
+        
+        $scope.prioritizations = [
+                                  {name: "First Come First Serve", orderField: "checkinTimeSortable"},
+                                  {name: "Patient Complaint", orderField: "complaintPriority"},
+                                  {name: "Complaint Severity", orderField: "complaintSeverity"},
+                                  {name: "Smart Priority", orderField: "smartSortKey"}
+                                  ];
+                                  
+		
+        
+        $scope.patientSuccessApiCall = function(successResponse) {
 		    $log.info("Response received by MainCtrl.js :: patientSuccessApiCall");
 			$scope.patientObject = successResponse;
             if($scope.paginationNumbers === 0){
@@ -29,6 +38,79 @@ angular.module('myApp.controllers', [])
                     $scope.paginationNumbers += 1;
                 }
             }
+            //ADD RANDOMIZED DATA HERE
+            
+            var patientIndex;
+            for (patientIndex = 0; patientIndex < $scope.patientObject.entry.length; patientIndex++)
+            {
+            	$scope.patientObject.entry[patientIndex].checkinTimeSortable 	= $scope.getRandomInt(0,1440);
+            	$scope.patientObject.entry[patientIndex].checkinTime 			= $scope.minutesToTime($scope.patientObject.entry[patientIndex].checkinTimeSortable); 
+            	
+            	$scope.patientObject.entry[patientIndex].complaintPriority 		= $scope.getRandomInt(0,10);
+            	$scope.patientObject.entry[patientIndex].complaint 				= $scope.complaintMapper($scope.patientObject.entry[patientIndex].complaintPriority);
+            	$scope.patientObject.entry[patientIndex].complaintSeverity 		= $scope.getRandomInt(1,10);
+            	$scope.patientObject.entry[patientIndex].smartSortKey 			= $scope.patientObject.entry[patientIndex].complaintPriority * $scope.patientObject.entry[patientIndex].complaintSeverity;
+            }
+            
+            //remember to sort lowest first. Ascending order on CheckinTime, complaintPriority, and smartSortKey
+            
+		}
+		$scope.patientSortOrder = "checkinTimeSortable";
+		
+		$scope.setPatientSortOrder = function(order){
+			$scope.patientSortOrder = order.orderField;
+			$scope.prioritizationMethod = order.name;
+		};
+		
+		$scope.minutesToTime = function(numMinutes){
+			var hours = Math.floor(numMinutes / 60);
+			var minutes = numMinutes % 60;
+			
+			return hours + ":" + minutes;
+		}
+		
+		$scope.complaintMapper = function(complaintNumber){
+			var complaint;
+			switch(complaintNumber){
+			case 0: 
+				complaint = "TRAUMA/INJURY";
+				break;
+			case 1:
+				complaint = "CHEST PAINS";
+				break;
+			case 2:
+				complaint = "ABDOMINAL PAIN";
+				break;
+			case 3: 
+				complaint = "SERIOUS HEADACHE";
+				break;
+			case 4:
+				complaint = "VOMITING";
+				break;
+			case 5:
+				complaint = "FEVER";
+				break;
+			case 6: 
+				complaint = "BACK PAIN";
+				break;
+			case 7:
+				complaint = "COUGH";
+				break;
+			case 8:
+				complaint = "SORE THROAT";
+				break;
+			case 9:
+				complaint = "TOOTHACHE";
+				break;
+			case 10: 
+				complaint = "SKIN/RASH";
+				break;
+			}
+			return complaint;
+		}
+		
+		$scope.getRandomInt = function(min, max){
+			return Math.floor(Math.random()*(max - min + 1)) + min;
 		}
 
         $scope.getNumber = function(num) {

@@ -21,9 +21,7 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<li ng-repeat="prioritization in prioritizations"><a
-								href="#">{{prioritization.name}}</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Define New</a></li>
+								href="" ng-click="setPatientSortOrder({{prioritization}})">{{prioritization.name}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -42,9 +40,10 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Priority</th>
-									<th>Last Name</th>
-									<th>First Name</th>
+									<th style="width: 5%"><i class="fa fa-user-md fa-5"></i></th>
+									<th>Name</th>
+									<th>Time</th>
+									<th>Complaint</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,11 +51,12 @@
 									ng-click="patientClick('{{patient.id}}','{{patient.content.name[0].given[0]}}','{{patient.content.name[0].family[0]}}')"
 									style="cursor: pointer;"
 									ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}"
-									ng-repeat="patient in patientObject.entry"
+									ng-repeat="patient in patientObject.entry | orderBy: patientSortOrder"
 									ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
 									<td>{{$index + offset + 1}}</td>
-									<td>{{patient.content.name[0].family[0]}}</td>
-									<td>{{patient.content.name[0].given[0]}}</td>
+									<td>{{patient.content.name[0].given[0]}} {{patient.content.name[0].family[0]}}</td>
+									<td>{{patient.checkinTime}}</td>
+									<td>{{patient.complaint}}</td>
 								</tr>
 							</tbody>
 						</table>
