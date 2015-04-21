@@ -16,6 +16,13 @@ angular.module('myApp.controllers').controller('ConditionCtrl', [
         var conditionSuccessApiCall = function(successResponse) {
             $log.info("Response received by ConditionCtrl.js :: conditionSuccessApiCall");
             $scope.conditionObject = successResponse;
+            $scope.conditionObject.entry.sort(function(a, b) {
+            	if (a.content.code.coding[0].system.search('snomed') == -1) {
+            		return new Date(b.content.onsetDate) - new Date(a.content.onsetDate);
+            	} else {
+            		return new Date(b.content.dateAsserted) - new Date(a.content.dateAsserted);
+            	}
+            });
         }
         var conditionFailureApiCall = function(failureResponse) {
             $log.info("Response received by ConditionCtrl.js :: conditionFailureApiCall");
