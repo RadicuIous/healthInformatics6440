@@ -17,11 +17,18 @@ angular.module('myApp.controllers').controller('ConditionCtrl', [
             $log.info("Response received by ConditionCtrl.js :: conditionSuccessApiCall");
             $scope.conditionObject = successResponse;
             $scope.conditionObject.entry.sort(function(a, b) {
+            	var dateA, dateB
             	if (a.content.code.coding[0].system.search('snomed') == -1) {
-            		return new Date(b.content.onsetDate) - new Date(a.content.onsetDate);
+            		dateA = new Date(a.content.onsetDate);
             	} else {
-            		return new Date(b.content.dateAsserted) - new Date(a.content.dateAsserted);
+            		dateA = new Date(a.content.dateAsserted);
             	}
+            	if (b.content.code.coding[0].system.search('snomed') == -1) {
+            		dateB = new Date(b.content.onsetDate);
+            	} else {
+            		dateB = new Date(b.content.dateAsserted);
+            	}
+            	return dateB - dateA;
             });
         }
         var conditionFailureApiCall = function(failureResponse) {

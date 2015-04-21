@@ -43,7 +43,7 @@
             				{{condition.content.code.coding[0].display}}
             			</div>
             			<div class="panel-body">
-	            			<dl class="pull-left dl-horizontal" style="margin:0 0;margin-left:40px;">
+	            			<dl class="pull-left dl-horizontal" style="margin:0 0;margin-left:35px;">
 	            				<dt>Onset Date:</dt>
 		            			<dd>{{condition.content.code.coding[0].system.search('snomed') == -1 ? 
 		            				  condition.content.onsetDate : condition.content.dateAsserted | date: 'yyyy-M-d'}}</dd>
