@@ -18,16 +18,13 @@ angular.module('healthInformatics.fhir.navbar', ['ngResource'])
                     break;
                     case "OVERVIEW":
                     case "CONDITION":
-                    case "MANAGEMENT":
+                    case "MEDICATION":
                     case "GRAPHS":
-                    case "DOCTORS":
                         $rootScope.navLinks = [
                             { "description":"Dashboard",  "link":"index.html#/index"},
                             { "description":"Overview",   "link":"index.html#/Overview/"+$routeParams.patientId },
                             { "description":"Condition",    "link":"index.html#/Condition/"+$routeParams.patientId},
-                            { "description":"Management", "link":"index.html#/Management/"+$routeParams.patientId},
-                            { "description":"Medications","link":"index.html#/Medications/"+$routeParams.patientId},
-                            { "description":"Doctors",    "link":"index.html#/Doctors/"+$routeParams.patientId}
+                            { "description":"Medications","link":"index.html#/Medications/"+$routeParams.patientId}
                         ]
                     break;
                     default:
