@@ -14,11 +14,7 @@ angular.module('healthInformatics.fhir.navbar', ['ngResource'])
             var _updateNavigation = function(path){
                 switch(path){
                     case "MAIN":
-                        $rootScope.navLinks = [
-                            { "description":"Link 1" ,  "link":"#" },
-                            { "description":"Link 2" ,  "link":"#"},
-                            { "description":"Link 3" ,  "link":"#"}
-                        ]
+                        $rootScope.navLinks = []
                     break;
                     case "OVERVIEW":
                     case "CONDITION":
