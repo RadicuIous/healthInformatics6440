@@ -59,4 +59,13 @@ angular.module('myApp.filters', [])
             var temp = input.split('T');
             return temp[0];
         }
-    });
+    })
+    .filter('object2Array', function() {
+    return function(input) {
+        var out = [];
+        for(var i in input){
+            out.push(input[i]);
+        }
+        return out;
+    }
+});
