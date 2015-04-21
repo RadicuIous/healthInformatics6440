@@ -7,26 +7,36 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <div class="col-lg-8">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Medications & Prescriptions
-                </div>
-
-                    <div class="panel-body" ng-repeat="entry in patientStats">
-                        {{entry.content.medication.display}} - {{entry.content.dosageInstruction[0].doseQuantity.value}} {{entry.content.dosageInstruction[0].doseQuantity.units}}
-                            <li><span class="small"><em>Date: {{entry.content.dateWritten}} - Status: {{entry.content.status}}</em>
-                                    </span></li>
-                            <li><span class="small"><em>Dosage Details: {{entry.content.dosageInstruction[0].text}} - Dispense Repeats: {{entry.content.dispense.numberOfRepeatsAllowed}}  - Dispense Qty: {{entry.content.dispense.quantity.value}}</em>
-                                    </span></li>
-                        <li><span class="small"><em>Prescriber: {{entry.content.prescriber.display}} - Code: {{entry.content.contained[0].code.coding[0].code}}</em>
-                                    </span></li>
-                    </div>
-                    <div class="panel-body" ng-if="patientStats.length == 0" >
-                        No Medications or Prescriptions on Record.
-                    </div>
-
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-clock-o fa-fw"></i> Medications & Prescriptions Timeline
             </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <ul class="timeline">
+                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats">
+                        <div class="timeline-badge"><img ng-class="{'flip-it': $index % 2 === 1}"  src='/images/rx.jpg' height="50px" width="50px"></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title"> {{entry.content.medication.display}} - {{entry.content.dosageInstruction[0].doseQuantity.value}} {{entry.content.dosageInstruction[0].doseQuantity.units}}</h4>
+                                <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{entry.content.dateWritten  | removeTime}}</small>
+                                </p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>
+                                    <span class="small"><strong>Dosage Details:</strong> <em>{{entry.content.dosageInstruction[0].text}}</em></span><br />
+                                    <span class="small"><strong>Dispense Repeats:</strong> <em>{{entry.content.dispense.numberOfRepeatsAllowed}}</em></span><br />
+                                    <span class="small"><strong>Dispense Qty:</strong> <em>{{entry.content.dispense.quantity.value}}</em></span><br />
+                                    <span class="small"><strong>Prescriber:</strong> <em>{{entry.content.prescriber.display}}</em></span><br />
+                                    <span class="small"><strong>Code:</strong> <em>{{entry.content.contained[0].code.coding[0].code}}</em></span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.panel-body -->
         </div>
     </div>
 </div>
