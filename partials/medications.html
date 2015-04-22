@@ -13,8 +13,8 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <ul class="timeline">
-                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats | object2Array | orderBy:'content.dateWritten': true">
+                <ul class="timeline" ng-if="patientStats.entry.length != 0">
+                    <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats | object2Array | orderBy:'content.dateWritten': true" >
                         <div class="timeline-badge"><img ng-class="{'flip-it': $index % 2 === 1}"  src='/images/rx.jpg' height="50px" width="50px"></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -35,6 +35,9 @@
                         </div>
                     </li>
                 </ul>
+                <div class="panel-body" ng-if="patientStats.entry.length == 0" >
+                    No Medications or Prescriptions on Record.
+                </div>
             </div>
             <!-- /.panel-body -->
         </div>
