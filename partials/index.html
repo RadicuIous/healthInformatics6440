@@ -47,7 +47,7 @@
 								<tr
 									ng-click="patientClick('{{patient.id}}','{{patient.content.name[0].given[0]}}','{{patient.content.name[0].family[0]}}')"
 									style="cursor: pointer;"
-									ng-class="{'success':$index === 4, 'danger':$index === 1, 'info':$index === 5}"
+									ng-class="{'warning':patient.complaintSeverity >= 3 && patient.complaintSeverity < 7, 'danger':patient.complaintSeverity < 3, 'info':patient.complaintSeverity >=7 && patient.complaintSeverity <=8}"
 									ng-repeat="patient in patientObject.entry | orderBy: patientSortOrder"
 									ng-if="patient.content.name[0].given[0] !== undefined && patient.content.name[0].family[0] !== undefined">
 									<td>{{$index + offset + 1}}</td>
