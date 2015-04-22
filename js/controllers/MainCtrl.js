@@ -170,6 +170,10 @@ angular.module('myApp.controllers', [])
 		callAPIService.execute('Media', null, successfulApiCall, failureApiCall);
 		callAPIService.execute('Procedure', null, successfulApiCall, failureApiCall);
 		*/
+
+        $scope.closeModal = function(){
+            $rootScope.showModal = false;
+        }
 						
 	}]);
 
