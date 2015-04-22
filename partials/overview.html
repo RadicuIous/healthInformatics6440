@@ -18,6 +18,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <div ng-show="patientStats | isEmpty">No entries on record.</div>
                             <div class="list-group" ng-repeat="entry in patientStats">
                                 {{entry.content.name.coding[0].display}}
                                             <span class="pull-right text-muted small"><em><strong>{{entry.content.valueQuantity.value}} {{entry.content.valueQuantity.units}} </strong>{{entry.content.appliesDateTime  | removeTime}}</em>
@@ -34,6 +35,7 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <ul class="chat">
+                                    <div ng-show="uniqueObservations | isEmpty">No entries on record.</div>
                                     <li class="left clearfix" ng-repeat="entry in uniqueObservations">
                                     <span class="chat-img pull-left">
                                         <img src="/images/medical_icon.png" height="50px" width="50px" alt="User Avatar" class="img-circle">

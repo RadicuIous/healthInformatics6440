@@ -13,7 +13,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <ul class="timeline" ng-if="patientStats.entry.length != 0">
+                <ul class="timeline" ng-hide="patientStats | isEmpty">
                     <li ng-class="{'timeline-inverted' : $index % 2 === 0}" ng-repeat="entry in patientStats | object2Array | orderBy:'content.dateWritten': true" >
                         <div class="timeline-badge"><img ng-class="{'flip-it': $index % 2 === 1}"  src='/images/rx.jpg' height="50px" width="50px"></div>
                         <div class="timeline-panel">
@@ -35,7 +35,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="panel-body" ng-if="patientStats.entry.length == 0" >
+                <div ng-show="patientStats | isEmpty">
                     No Medications or Prescriptions on Record.
                 </div>
             </div>
